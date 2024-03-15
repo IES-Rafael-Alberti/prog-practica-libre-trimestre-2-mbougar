@@ -1,5 +1,11 @@
-package org.practicatrim2
+import javax.swing.SwingUtilities
+
 
 fun main() {
-    println("Hello World!")
+
+    SwingUtilities.invokeLater {
+        Vista
+        GestionPartida.tableroPartida = Vista.tableroPanel
+        GestionPartida.actualizarMovimientosPiezas() //Actualización inicial de los movimientos de cada pieza una vez esten posicionadas
+    }
 }

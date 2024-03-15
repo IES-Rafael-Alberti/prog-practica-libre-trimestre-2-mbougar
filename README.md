@@ -67,9 +67,39 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 #### **Criterio global 1: Instancia objetos y hacer uso de ellos**
 - **(2.a, 2.b, 2.c, 2.d, 2.f, 2.h, 4.f, 4.a)**: Describe cómo has instanciado y utilizado objetos en tu proyecto. ¿Cómo has aplicado los constructores y pasado parámetros a los métodos? Proporciona ejemplos específicos de tu código.
 
+_Respuesta: Para instanciar un objeto llamamos al constructor del objeto con los parametros que hagan falta dependiendo del constructor._
+
+```kotlin
+val tablero = Array(CASILLAS_FILA_TABLERO) { fila -> Array(CASILLAS_FILA_TABLERO) { columna -> Casilla(Posicion(fila,columna)) } }
+```
+_[Link al código en el repositorio](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-mbougar/blob/446d33d8bf48a515dee6a4358a4e5fa2a1fe6f20/src/main/kotlin/Tablero.kt#L10)_
+
+_En este ejemplo estamos creando 64 instancias de la clase Casilla las cuales toman como parámetro una instancia de la clase Posicion que tiene como parámetros fila y columna. Con los métodos ocurre algo similar, a la hora de llamarlos pondremos siempre () al final de su llamada con los parámetros del método dentro_
+
 #### **Criterio global 2: Crear y llamar métodos estáticos**
 - **(4.i)**: ¿Has definido algún método/propiedad estático en tu proyecto? ¿Cuál era el objetivo y por qué consideraste que debía ser estático en lugar de un método/propiedad de instancia?
 - **(2.e)**: ¿En qué parte del código se llama a un método estático o se utiliza la propiedad estática?
+
+_Respuesta: He definido tanto métodos como propiedades estáticas, la razón de implementarlos ha sido para permitir el acceso a ellos a todos los objetos de la clase y a clases ajenas a ellos._
+
+```kotlin
+companion object {
+   /**
+    * Método estático que obtiene el icono de una pieza.
+    * @param pieza La pieza de la que se desea obtener el icono.
+    * @return ImageIcon representando el icono de la pieza.
+    */
+   fun <T : Pieza> obtenerIconoPieza(pieza: T): ImageIcon {
+      val logo = ImageIcon("src/main/resources/images/${pieza.color}_${pieza.nombrePieza}.png")
+      val medidaFicha = Vista.tamanioTablero / Tablero.CASILLAS_FILA_TABLERO
+      val logoMin = ImageIcon(logo.image.getScaledInstance(medidaFicha, medidaFicha, Image.SCALE_SMOOTH))
+      return logoMin
+   }
+}
+```
+_[Link al código en el repositorio](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-mbougar/blob/446d33d8bf48a515dee6a4358a4e5fa2a1fe6f20/src/main/kotlin/Pieza.kt#L40-L45)_
+
+_En este ejemplo podemos ver un método estático que existe dentro de una clase abstracta y que todas las clases que hereden de ella podran llamar, asi como lo podrán llamar objetos de otras clases que quieran obtener el icono de una pieza especifica (lo hace por ejemplo la clase Casilla)_
 
 #### **Criterio global 3: Uso de entornos**
 - **(2.i)**: ¿Cómo utilizaste el IDE para el desarrollo de tu proyecto? Describe el proceso de creación, compilación, y prueba de tu programa.
@@ -89,6 +119,28 @@ Este conjunto de preguntas está diseñado para ayudarte a reflexionar sobre có
 #### **Criterio global 8: Documentado**
 - **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. ¿Que herramientas has utilizado? ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
 
+
+
 #### **Criterio global 9: Genéricos**
 - **(6.f)**: Muestra ejemplos de tu código sobre cómo has implementado una clase con genéricos. ¿Qué beneficio has obtenido?
 
+_Respuesta: He implementado un metodo genérico en la clase Pieza que devuelve el icono de una pieza de Clase desconocida que herede de Pieza._
+
+```kotlin
+companion object {
+   /**
+    * Método estático que obtiene el icono de una pieza.
+    * @param pieza La pieza de la que se desea obtener el icono.
+    * @return ImageIcon representando el icono de la pieza.
+    */
+   fun <T : Pieza> obtenerIconoPieza(pieza: T): ImageIcon {
+      val logo = ImageIcon("src/main/resources/images/${pieza.color}_${pieza.nombrePieza}.png")
+      val medidaFicha = Vista.tamanioTablero / Tablero.CASILLAS_FILA_TABLERO
+      val logoMin = ImageIcon(logo.image.getScaledInstance(medidaFicha, medidaFicha, Image.SCALE_SMOOTH))
+      return logoMin
+   }
+}
+```
+_[Link al código en el repositorio](https://github.com/IES-Rafael-Alberti/prog-practica-libre-trimestre-2-mbougar/blob/446d33d8bf48a515dee6a4358a4e5fa2a1fe6f20/src/main/kotlin/Pieza.kt#L40-L45)_
+
+_Implementar este método genérico ha hecho que sea más flexible y reusable, probablemente habría implementado más si me hubiera dado tiempo. Por ejemplo podría haber creado una única clase Pieza sin subclasses que herede un interfaz de movimiento genérico._

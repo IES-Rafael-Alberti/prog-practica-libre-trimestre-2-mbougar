@@ -373,7 +373,7 @@ _Como se puede ver, Swing me permite implementar la clase JFrame la cual genera 
 #### **Criterio global 8: Documentado**
 - **(7.h)**: Muestra ejemplos de cómo has documentado y comentado tu código. ¿Que herramientas has utilizado? ¿Cómo aseguras que tu documentación aporte valor para la comprensión, mantenimiento y depuración del código?
 
-_He documentado mi código aportando la mayor luz posible a su funcionamiento, he usado KDoc para definir clases y funciones y comentarios en linea para las partes que consideraba que necesitaban especificaciones extra. Para mejorart mis comentarios he utilizado [replit.com](replit.com) para que reformule mis comentarios dado que no soy muy bueno explicandome._
+_He documentado mi código aportando la mayor luz posible a su funcionamiento, he usado KDoc para definir clases y funciones y comentarios en linea para las partes que consideraba que necesitaban especificaciones extra. Para mejorart mis comentarios he utilizado replit.com para que reformule mis comentarios dado que no soy muy bueno explicandome._
 
 ```kotlin
 /**
